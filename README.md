@@ -1,45 +1,50 @@
-# Mini-Tweeter – Class Project
+# Mini‑Tweeter &nbsp;–&nbsp; Local Dev Guide
 
-## ✔️ Progress Checklist
+## ✅ / ⬜ Task Checklist (T1 – T8)
 
-| Task ID | Requirement | Status |
-|---------|-------------|--------|
-| **T1** | The system maintains **topics** (message threads). | ⬜ *TODO* |
-| **T2.1** | After login, show **2 most‑recent messages per subscribed topic**. | ⬜ *TODO* |
-| **T2.2** | After login, provide **topic directory** for new subscriptions **and** an **“unsubscribe”** button beside each current subscription. | ⬜ *TODO* |
-| **T3** | A user can **start a new topic** (auto‑subscribed). | ⬜ *TODO* |
-| **T4** | A user can **post a message** in a subscribed topic. | ⬜ *TODO* |
-| **T5** | Code follows the **MVC pattern**. | ✅ *Implemented*<br>• Models: `src/models/`<br>• Views: `src/views/`<br>• Controllers: `src/controllers/` |
-| **T6** | Implements the **Observer pattern**. | ⬜ *TODO* (event bus & subscribers) |
-| **T7** | Uses the **Singleton pattern** for DB access. | ✅ *Implemented* in `src/config/db.js` |
-| **T8** | Tracks & reports **topic access statistics**. | ⬜ *TODO* |
-
----
-
-## 🛠️ Open Work Items & Where to Code Them
-
-| Task | Files / Areas to Edit |
-|------|-----------------------|
-| **Topic schema & CRUD** (T1, T3) | `src/models/topic.js` · `src/controllers/topicController.js` · `src/routes/topic.js` |
-| **Message schema & CRUD** (T4) | `src/models/message.js` · `src/controllers/messageController.js` · `src/routes/message.js` |
-| **Dashboard logic & views** (T2.1, T2.2) | Create `src/controllers/dashboardController.js`, edit `src/views/dashboard.ejs` |
-| **Observer pattern** (T6) | Create `src/observers/eventBus.js` and subscriber modules (`notifySubscribers.js`, `topicStats.js`, …) |
-| **Topic statistics** (T8) | Increment `viewCount` in an observer; add stats endpoint/view |
+| ID       | Requirement                                                                                                               | Status                                    |
+| -------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **T1**   | System maintains **topics** (message threads).                                                                            | ⬜ _TODO_                                 |
+| **T2.1** | On login, show the **two newest messages** in every subscribed topic.                                                     | ⬜ _TODO_                                 |
+| **T2.2** | Login page also offers a **topic directory** (subscribe) and an **unsubscribe** button next to each current subscription. | ⬜ _TODO_                                 |
+| **T3**   | User can **create a new topic** (auto‑subscribed).                                                                        | ⬜ _TODO_                                 |
+| **T4**   | User can **post a message** in any topic they’re subscribed to.                                                           | ⬜ _TODO_                                 |
+| **T5**   | Follows the **MVC pattern**.                                                                                              | ✅ _Done_ (`models/ views/ controllers/`) |
+| **T6**   | Implements the **Observer pattern** (e.g., event bus for new messages, stats, notifications).                             | ⬜ _TODO_                                 |
+| **T7**   | Uses the **Singleton pattern** for DB access.                                                                             | ✅ _Done_ (`src/config/db.js`)            |
+| **T8**   | Tracks & reports **topic access statistics**.                                                                             | ⬜ _TODO_                                 |
 
 ---
 
-## ▶️ Running Locally
+## 🗂️ Where to Finish Each Task
+
+| Task ID(s)     | Key files / folders to edit                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------- |
+| **T1, T3**     | `src/models/topic.js` · `src/controllers/topicController.js` · `src/routes/topic.js`                 |
+| **T2.1, T2.2** | `src/controllers/dashboardController.js` _(create)_ · `src/views/dashboard.ejs`                      |
+| **T4**         | `src/models/message.js` · `src/controllers/messageController.js` · `src/routes/message.js`           |
+| **T6**         | `src/observers/eventBus.js` · add subscriber modules (`notifySubscribers.js`, `topicStats.js`, etc.) |
+| **T8**         | `src/models/stats.js` (optional) · observer that increments stats · expose an endpoint / view        |
+
+_(T5 & T7 are fully implemented; no work required.)_
+
+---
+
+## ▶️ Run Locally
 
 ```bash
-# 1 – install dependencies
+# 1 – install dependencies
 npm install
 
-# 2 – start the server
+# 2 – start the dev server
 node src/app.js
 ```
 
-*Server runs on **http://localhost:3000***  
-Sign‑up at **/signup**, Log‑in at **/login**
+- App opens on **http://localhost:3000**
+- Sign‑up page: **/signup**  
+  Log‑in page: **/login**
 
-> **Prerequisites:** Node ≥ 18 and internet access to the MongoDB Atlas cluster.
-
+> **Prerequisites:**
+>
+> - Node.js ≥ 18
+> - Internet connection (to reach the MongoDB Atlas cluster configured in `src/config/db.js`)
