@@ -1,4 +1,4 @@
-# Mini‑Tweeter &nbsp;–&nbsp; Local Dev Guide
+# Mini‑Tweeter &nbsp;–&nbsp;
 
 ## ✅ / ⬜ Task Checklist (T1 – T8)
 
