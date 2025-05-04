@@ -20,6 +20,8 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => res.redirect('/signup')); //makes signup be the default route 
+
 // routes
 app.use("/", require("./routes/auth"));
 //app.use("/", require("./routes/topic")); // stubs
