@@ -20,6 +20,7 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => { res.redirect("/login"); });
 // routes
 app.use("/", require("./routes/auth"));
 //app.use("/", require("./routes/topic")); // stubs
