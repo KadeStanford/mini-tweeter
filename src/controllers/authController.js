@@ -8,12 +8,12 @@ exports.postSignup = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
-    //Create user preferences record with firstlogin flag
-    await UserPreference.create({
+   // Create user preferences record with firstLogin flag
+   await UserPreference.create({
     userId: newUser._id,
-      genres: [],
-      firstLogin: true
-    )};
+    genres: [],
+    firstLogin: true
+  });
 
     res.redirect("/login");
 

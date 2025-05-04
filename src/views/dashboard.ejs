@@ -1,3 +1,45 @@
-<h1>Dashboard</h1>
-<p>Topics & messages will appear here once implemented.</p>
-<a href="/logout">Log out</a>
+<h1>Welcome, <%= user.username %></h1>
+
+<% if (preferredGenres && preferredGenres.length > 0) { %>
+  <p>Your interests: <%= preferredGenres.join(', ') %></p>
+<% } %>
+
+<h2>Topics You Might Like</h2>
+
+<% if (topicsWithMessages.length === 0) { %>
+  <p>No topics found in your preferred genres.</p>
+<% } else { %>
+  <div class="topics">
+    <% topicsWithMessages.forEach(item => { %>
+      <div class="topic-container">
+        <div class="topic-header">
+          <h3><%= item.topic.title %></h3>
+          <span class="topic-genre"><%= item.topic.genre %></span>
+        </div>
+        
+        <div class="recent-messages">
+          <h4>Recent Messages:</h4>
+          <% if (item.messages.length === 0) { %>
+            <p>No messages yet in this topic.</p>
+          <% } else { %>
+            <% item.messages.forEach(message => { %>
+              <div class="message">
+                <div class="message-header">
+                  <span class="message-author"><%= message.authorId ? message.authorId.username : 'Unknown' %></span>
+                  <span class="message-date"><%= message.createdAt.toLocaleString() %></span>
+                </div>
+                <div class="message-body">
+                  <%= message.body %>
+                </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<div class="dashboard-footer">
+  <a href="/logout">Log out</a>
+</div>

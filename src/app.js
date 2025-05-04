@@ -20,17 +20,16 @@ app.use(
   })
 );
 
+app.get("/dashboard", require('./controllers/dashboardController').getDashboard);
+
 app.get("/", (req, res) => { res.redirect("/login"); });
 // routes
 app.use("/", require("./routes/auth"));
+app.use("/", require("./routes/genre")); 
 //app.use("/", require("./routes/topic")); // stubs
 //app.use("/", require("./routes/message")); // stubs
 
-// protected placeholder
-app.get("/dashboard", (req, res) => {
-  if (!req.session.userId) return res.redirect("/login");
-  res.render("dashboard");
-});
+
 
 // server
 const PORT = process.env.PORT || 3000;
