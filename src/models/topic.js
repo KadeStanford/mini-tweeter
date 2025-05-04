@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 
 const topicSchema = new mongoose.Schema({
   title: { type: String, required: true },
+  genre: { type: String, required: true },
   creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

@@ -1,0 +1,16 @@
+
+<h2>Select Your Topic Interests</h2>
+<p>Welcome! Please select the genres you're interested in to personalize your experience.</p>
+
+<form action="/genre-preferences" method="post">
+  <div class="genre-options">
+    <% genres.forEach(genre => { %>
+      <div class="genre-option">
+        <input type="checkbox" id="<%= genre.toLowerCase() %>" name="genres" value="<%= genre %>">
+        <label for="<%= genre.toLowerCase() %>"><%= genre %></label>
+      </div>
+    <% }) %>
+  </div>
+  
+  <button type="submit">Save Preferences</button>
+</form>
