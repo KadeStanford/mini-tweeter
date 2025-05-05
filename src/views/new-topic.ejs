@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a New Topic | Mini-Tweeter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <%- include('partials/styles') %>
+  <style>
+    .topic-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 30px;
+      overflow: hidden;
+    }
+    
+    .topic-container h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .topic-form {
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-text);
+      font-size: 0.95rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--dark-text);
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.2);
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .create-btn {
+      flex: 1;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+    
+    .create-btn:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    .cancel-btn {
+      flex: 1;
+      background-color: transparent;
+      color: var(--neutral-color);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .cancel-btn:hover {
+      background-color: var(--light-gray);
+      color: var(--dark-text);
+    }
+    
+    @media (max-width: 480px) {
+      .form-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar', { user: user }) %>
+
+  <div class="container">
+    <div class="topic-container">
+      <h1>Create a New Topic</h1>
+      
+      <form action="/topic/create" method="POST" class="topic-form">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select id="genre" name="genre" required>
+            <option value="">Select a genre</option>
+            <option value="Technology">Technology</option>
+            <option value="Science">Science</option>
+            <option value="Arts">Arts</option>
+            <option value="Sports">Sports</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Politics">Politics</option>
+            <option value="Health">Health</option>
+            <option value="Education">Education</option>
+            <option value="Business">Business</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="create-btn">Create Topic</button>
+          <a href="/dashboard" class="cancel-btn">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

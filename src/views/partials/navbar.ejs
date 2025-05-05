@@ -1,0 +1,32 @@
+<nav class="navbar">
+    <a href="/dashboard" class="navbar-brand">Mini-Tweeter</a>
+    <div class="navbar-nav">
+      <div class="nav-item">
+        <a href="/subscriptions" class="nav-link">
+          <i class="fas fa-bookmark"></i> Manage
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="/topic/new" class="btn btn-primary">
+          <i class="fas fa-plus"></i> New Topic
+        </a>
+      </div>
+      <div class="nav-item profile-menu">
+        <div class="profile-icon" id="profileToggle">
+          <%= user.username.charAt(0).toUpperCase() %>
+        </div>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="/profile" class="dropdown-item">
+            <i class="fas fa-user"></i> Profile
+          </a>
+          <a href="/settings" class="dropdown-item">
+            <i class="fas fa-cog"></i> Settings
+          </a>
+          <a href="/logout" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i> Log out
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  

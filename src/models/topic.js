@@ -11,12 +11,14 @@ const mongoose = require("mongoose");
 
 const topicSchema = new mongoose.Schema({
   title: { type: String, required: true },
+  genre: { type: String, required: true },
   creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
+  description: { type: String, required: true },
   viewCount: { type: Number, default: 0 },
 });
 
