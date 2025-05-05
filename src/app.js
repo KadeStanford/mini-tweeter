@@ -22,7 +22,8 @@ app.use(
 
 app.get("/dashboard", require('./controllers/dashboardController').getDashboard);
 
-app.get("/", (req, res) => { res.redirect("/login"); });
+app.get('/', (req, res) => res.redirect('/signup')); //makes signup be the default route 
+
 // routes
 app.use("/", require("./routes/auth"));
 app.use("/", require("./routes/genre")); 
