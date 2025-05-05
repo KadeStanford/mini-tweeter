@@ -4,11 +4,11 @@
 
 | ID       | Requirement                                                                                                               | Status                                    |
 | -------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| **T1**   | System maintains **topics** (message threads).                                                                            | ⬜ _TODO_                                 |
-| **T2.1** | On login, show the **two newest messages** in every subscribed topic.                                                     | ⬜ _TODO_                                 |
-| **T2.2** | Login page also offers a **topic directory** (subscribe) and an **unsubscribe** button next to each current subscription. | ⬜ _TODO_                                 |
-| **T3**   | User can **create a new topic** (auto‑subscribed).                                                                        | ⬜ _TODO_                                 |
-| **T4**   | User can **post a message** in any topic they’re subscribed to.                                                           | ⬜ _TODO_                                 |
+| **T1**   | System maintains **topics** (message threads).                                                                            | ✅ _Done_                                 |
+| **T2.1** | On login, show the **two newest messages** in every subscribed topic.                                                     | ✅ _Done_                                |
+| **T2.2** | Login page also offers a **topic directory** (subscribe) and an **unsubscribe** button next to each current subscription. | ✅ _Done_                                 |
+| **T3**   | User can **create a new topic** (auto‑subscribed).                                                                        | ✅ _Done_                                 |
+| **T4**   | User can **post a message** in any topic they’re subscribed to.                                                           | ✅ _Done_                                 |
 | **T5**   | Follows the **MVC pattern**.                                                                                              | ✅ _Done_ (`models/ views/ controllers/`) |
 | **T6**   | Implements the **Observer pattern** (e.g., event bus for new messages, stats, notifications).                             | ⬜ _TODO_                                 |
 | **T7**   | Uses the **Singleton pattern** for DB access.                                                                             | ✅ _Done_ (`src/config/db.js`)            |
