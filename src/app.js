@@ -26,8 +26,8 @@ app.get("/", (req, res) => { res.redirect("/login"); });
 // routes
 app.use("/", require("./routes/auth"));
 app.use("/", require("./routes/genre")); 
-//app.use("/", require("./routes/topic")); // stubs
-//app.use("/", require("./routes/message")); // stubs
+app.use("/", require("./routes/topic")); // stubs
+app.use("/", require("./routes/message")); // stubs
 
 
 

@@ -1,6 +1,16 @@
-const router = require("express").Router();
-const m = require("../controllers/messageController");
+const express = require('express');
+const router = express.Router();
+const messageController = require('../controllers/messageController');
 
-router.all("/:anything*", t.placeholder);
+// Authentication middleware
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) {
+    return next();
+  }
+  res.redirect('/login');
+};
+
+// Create a new message
+router.post('/message/create', isAuthenticated, messageController.createMessage);
 
 module.exports = router;

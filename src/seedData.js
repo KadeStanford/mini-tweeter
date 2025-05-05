@@ -18,20 +18,54 @@ const AVAILABLE_GENRES = [
 ];
 
 const SAMPLE_TOPICS = {
-  'Technology': ['Web Development', 'Artificial Intelligence'],
-  'Sports': ['Soccer', 'Basketball'],
-  'Entertainment': ['Movies', 'Music'],
-  'Science': ['Space Exploration', 'Physics'],
-  'Politics': ['Global Politics', 'Economic Policy'],
-  'Health': ['Nutrition', 'Mental Health'],
-  'Business': ['Startup Tips', 'Marketing'],
-  'Education': ['Online Learning', 'Teaching Methods']
+  'Technology': [
+    'The future of AI in everyday life',
+    'Next.js vs. React — What to choose in 2025?'
+  ],
+  'Sports': [
+    'Can Messi still dominate MLS?',
+    'NBA playoffs: Who’s taking the championship?'
+  ],
+  'Entertainment': [
+    'Top 5 must-watch movies this summer',
+    'Why K-pop is taking over the world'
+  ],
+  'Science': [
+    'NASA’s latest Mars mission updates',
+    'How quantum computing will change the world'
+  ],
+  'Politics': [
+    'What the 2024 elections mean for young voters',
+    'Crypto regulations: A necessary evil?'
+  ],
+  'Health': [
+    'Why sleep is your superpower',
+    'The rise of mental health apps in Gen Z'
+  ],
+  'Business': [
+    'How to pitch your startup in 60 seconds',
+    'The freelance economy: Is it sustainable?'
+  ],
+  'Education': [
+    'AI tutors: Should schools embrace them?',
+    'Is college still worth it in 2025?'
+  ]
 };
 
+
 const SAMPLE_MESSAGES = [
-  'This is a great topic to discuss!',
-  'I have been following this for a while now.'
+  "Absolutely agree with this 💯",
+  "Interesting take. I never thought of it that way!",
+  "Anyone else following this? It's getting wild.",
+  "I've been saying this for years!",
+  "This aged well 😂",
+  "Love how this thread explains it so simply.",
+  "Bookmarking this for later 🔖",
+  "Can someone explain this to me like I'm five?",
+  "Y'all really need to read more before posting 😅",
+  "This is the best thing I’ve read today 👏"
 ];
+
 
 async function seedData() {
   try {

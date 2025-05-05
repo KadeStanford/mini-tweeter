@@ -1,16 +1,165 @@
-
-<h2>Select Your Topic Interests</h2>
-<p>Welcome! Please select the genres you're interested in to personalize your experience.</p>
-
-<form action="/genre-preferences" method="post">
-  <div class="genre-options">
-    <% genres.forEach(genre => { %>
-      <div class="genre-option">
-        <input type="checkbox" id="<%= genre.toLowerCase() %>" name="genres" value="<%= genre %>">
-        <label for="<%= genre.toLowerCase() %>"><%= genre %></label>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Interests | Mini-Tweeter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <%- include('partials/styles') %>
+  <style>
+    .auth-container {
+      max-width: 550px;
+      margin: 60px auto;
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 30px;
+      overflow: hidden;
+    }
+    
+    .auth-container h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .auth-container p {
+      color: var(--neutral-color);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .auth-container form {
+      width: 100%;
+    }
+    
+    .genre-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .genre-option {
+      display: flex;
+      align-items: center;
+    }
+    
+    .genre-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    
+    .genre-option label {
+      position: relative;
+      padding-left: 35px;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+      color: var(--dark-text);
+      display: flex;
+      align-items: center;
+      height: 24px;
+    }
+    
+    .genre-option label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--border-color);
+      background-color: var(--white);
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .genre-option input[type="checkbox"]:checked + label:before {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .genre-option input[type="checkbox"]:checked + label:after {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    
+    .genre-option input[type="checkbox"]:focus + label:before {
+      box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.2);
+    }
+    
+    .auth-container button {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 15px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .auth-container button:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    .auth-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .auth-logo a {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 480px) {
+      .genre-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <a href="/">Mini-Tweeter</a>
       </div>
-    <% }) %>
+      <h2>Select Your Topic Interests</h2>
+      <p>Welcome! Please select the genres you're interested in to personalize your experience.</p>
+      
+      <form action="/genre-preferences" method="post">
+        <div class="genre-options">
+          <% genres.forEach(genre => { %>
+            <div class="genre-option">
+              <input type="checkbox" id="<%= genre.toLowerCase() %>" name="genres" value="<%= genre %>">
+              <label for="<%= genre.toLowerCase() %>"><%= genre %></label>
+            </div>
+          <% }) %>
+        </div>
+        
+        <button type="submit">Save Preferences</button>
+      </form>
+    </div>
   </div>
-  
-  <button type="submit">Save Preferences</button>
-</form>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

@@ -18,6 +18,7 @@ const topicSchema = new mongoose.Schema({
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
+  description: { type: String, required: true },
   viewCount: { type: Number, default: 0 },
 });
 

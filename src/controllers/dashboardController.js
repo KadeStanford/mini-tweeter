@@ -1,8 +1,8 @@
-
 const Topic = require('../models/topic');
 const Message = require('../models/message');
 const User = require('../models/user');
 const UserPreference = require('../models/userpreference');
+const Subscription = require('../models/subscription');
 
 exports.getDashboard = async (req, res) => {
   try {
@@ -27,35 +27,48 @@ exports.getDashboard = async (req, res) => {
     // Get user's preferred genres
     const preferredGenres = userPrefs ? userPrefs.genres : [];
     
-    // Get topics from preferred genres
-    let topicsWithMessages = [];
+    // Get user's subscriptions
+    const subscriptions = await Subscription.find({ userId });
+    const subscribedTopicIds = subscriptions.map(sub => sub.topicId);
     
-    if (preferredGenres.length > 0) {
-      // Find topics in user's preferred genres
-      const topics = await Topic.find({ 
-        genre: { $in: preferredGenres } 
-      }).sort({ createdAt: -1 }).limit(10);
-      
-      // For each topic, get 2 most recent messages
-      for (const topic of topics) {
-        const messages = await Message.find({ topicId: topic._id })
+    // Get subscribed topics with 2 most recent messages for each
+    const subscribedTopicsWithMessages = [];
+    
+    for (const topicId of subscribedTopicIds) {
+      const topic = await Topic.findById(topicId);
+      if (topic) {
+        const messages = await Message.find({ topicId })
+          .populate('authorId', 'username')
           .sort({ createdAt: -1 })
-          .limit(2)
-          .populate('authorId', 'username');
-        
-        topicsWithMessages.push({
+          .limit(2);
+          
+        subscribedTopicsWithMessages.push({
           topic,
           messages
         });
       }
     }
     
+    // Find recommended topics based on user preferences
+    let recommendedTopics = [];
+    if (preferredGenres && preferredGenres.length > 0) {
+      // Get topics in preferred genres that user hasn't subscribed to
+      recommendedTopics = await Topic.find({
+        genre: { $in: preferredGenres },
+        _id: { $nin: subscribedTopicIds }
+      }).limit(5);
+    }
+    
     res.render('dashboard', {
       user,
-      topicsWithMessages,
-      preferredGenres
+      preferredGenres,
+      subscribedTopicsWithMessages,
+      recommendedTopics,
+      topicsWithMessages: [], // For backward compatibility
+      title: 'Dashboard'
     });
   } catch (error) {
+    console.error(error);
     res.status(500).send('Error loading dashboard: ' + error.message);
   }
 };
