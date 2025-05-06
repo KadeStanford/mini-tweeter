@@ -10,9 +10,9 @@
 | **T3**   | User can **create a new topic** (auto‑subscribed).                                                                        | ✅ _Done_                                 |
 | **T4**   | User can **post a message** in any topic they’re subscribed to.                                                           | ✅ _Done_                                 |
 | **T5**   | Follows the **MVC pattern**.                                                                                              | ✅ _Done_ (`models/ views/ controllers/`) |
-| **T6**   | Implements the **Observer pattern** (e.g., event bus for new messages, stats, notifications).                             | ⬜ _TODO_                                 |
+| **T6**   | Implements the **Observer pattern** (e.g., event bus for new messages, stats, notifications).                             | ✅ _Done_                                 |
 | **T7**   | Uses the **Singleton pattern** for DB access.                                                                             | ✅ _Done_ (`src/config/db.js`)            |
-| **T8**   | Tracks & reports **topic access statistics**.                                                                             | ⬜ _TODO_                                 |
+| **T8**   | Tracks & reports **topic access statistics**.                                                                             | ✅ _Done_                                 |
 
 ---
 
