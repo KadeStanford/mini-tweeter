@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
-const MONGO_URI =
-  "mongodb+srv://kade:Stanford24@cmps415.zsbfjv5.mongodb.net/?retryWrites=true&w=majority&appName=CMPS415";
+const MONGO_URI = process.env.MONGO_URI;
 
 class Database {
   constructor() {
@@ -11,7 +11,7 @@ class Database {
       useUnifiedTopology: true,
     });
     mongoose.connection.once("open", () =>
-      console.log("✅ MongoDB connected.")
+      console.log(" MongoDB connected.")
     );
     mongoose.connection.on("error", console.error);
     Database.instance = this;

@@ -1,5 +1,5 @@
-
-require('./config/db'); 
+require("dotenv").config();
+require('./config/db');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./models/user');
@@ -52,7 +52,6 @@ const SAMPLE_TOPICS = {
   ]
 };
 
-
 const SAMPLE_MESSAGES = [
   "Absolutely agree with this 💯",
   "Interesting take. I never thought of it that way!",
@@ -66,6 +65,16 @@ const SAMPLE_MESSAGES = [
   "This is the best thing I’ve read today 👏"
 ];
 
+const SAMPLE_DESCRIPTIONS = {
+  'Technology': 'Discussions on the latest innovations and trends in technology, including AI, software, and hardware.',
+  'Sports': 'Explore the world of sports, including the latest news, match results, and analysis.',
+  'Entertainment': 'Stay updated on the hottest movies, music, celebrities, and all things entertainment.',
+  'Science': 'Insights into scientific discoveries, research, and the future of science and technology.',
+  'Politics': 'Political debates, election updates, policy discussions, and analysis of current events.',
+  'Health': 'Conversations about physical and mental well-being, fitness, healthcare, and medical advancements.',
+  'Business': 'The latest trends in business, entrepreneurship, startups, and the economy.',
+  'Education': 'A look at educational systems, online learning, and the future of education.'
+};
 
 async function seedData() {
   try {
@@ -74,7 +83,7 @@ async function seedData() {
     await Topic.deleteMany({});
     await Message.deleteMany({});
     
-    console.log(' Cleared existing data');
+    console.log('Cleared existing data');
     
     // Creating admin for all these seeded topics
     const adminPassword = await bcrypt.hash('admin123', 12);
@@ -91,12 +100,14 @@ async function seedData() {
     
     for (const genre of AVAILABLE_GENRES) {
       const topicTitles = SAMPLE_TOPICS[genre];
+      const description = SAMPLE_DESCRIPTIONS[genre];
       
       for (const title of topicTitles) {
         const topic = await Topic.create({
           title,
           genre,
           creatorId: admin._id,
+          description, 
           viewCount: Math.floor(Math.random() * 50) 
         });
         
@@ -112,8 +123,9 @@ async function seedData() {
         }
       }
     }
+    
     console.log(`Created ${createdTopics.length} topics with sample messages`);
-    console.log(' Seeding completed successfully');
+    console.log('Seeding completed successfully');
     
   } catch (error) {
     console.error('Error seeding data:', error);
