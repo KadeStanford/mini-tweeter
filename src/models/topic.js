@@ -23,3 +23,9 @@ const topicSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Topic", topicSchema);
+// Method to increment the view count
+topicSchema.methods.incrementViewCount = function () {
+  this.viewCount += 1;
+  return this.save(); // Save the updated document to the database
+};
+

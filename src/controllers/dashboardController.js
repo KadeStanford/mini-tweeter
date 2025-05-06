@@ -3,6 +3,14 @@ const Message = require('../models/message');
 const User = require('../models/user');
 const UserPreference = require('../models/userpreference');
 const Subscription = require('../models/subscription');
+const eventBus = require('../eventbus');
+
+
+
+eventBus.subscribe('newMessage', (message) => {
+  console.log("New message received:", message);  // Log the new message to the console
+  // Additional actions can be added here, such as updating the UI or notifying users
+});
 
 exports.getDashboard = async (req, res) => {
   try {

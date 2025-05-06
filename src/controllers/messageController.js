@@ -2,6 +2,7 @@ const Message = require('../models/message');
 const Topic = require('../models/topic');
 const User = require('../models/user');
 const Subscription = require('../models/subscription');
+const eventBus = require('../eventbus'); 
 
 // Create a new message
 exports.createMessage = async (req, res) => {
@@ -31,8 +32,11 @@ exports.createMessage = async (req, res) => {
       createdAt: new Date()
     });
     
-    await newMessage.save();
+    await newMessage.save();  // Save the message to the database
     
+    // Emit the 'newMessage' event after saving the new message
+    eventBus.emit('newMessage', newMessage);  // Emit the new message object
+
     // Redirect back to the topic
     res.redirect(`/topic/${topicId}`);
   } catch (err) {
