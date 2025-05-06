@@ -1,3 +1,73 @@
 <footer>
-    <p>&copy; 2025 Mini-Tweeter | All rights reserved</p>
-  </footer>
+  <p>&copy; 2025 Mini-Tweeter | All rights reserved</p>
+</footer>
+
+<!-- ---------- Toast container ---------- -->
+<div id="toast-container"></div>
+
+<!-- ---------- Toast CSS ---------- -->
+<style>
+  #toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+  }
+  .toast {
+    background: #323232;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-top: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s, transform 0.4s;
+    font-size: 0.95rem;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .toast a {
+    color: #fff;
+    text-decoration: underline;
+  }
+</style>
+
+<!-- ---------- Toast / SSE JS ---------- -->
+<script>
+  (function () {
+    if (!window.EventSource) return; // fallback silently
+
+    const source = new EventSource("/notifications/events");
+
+    source.addEventListener("message", (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === "newMessage") {
+          showToast(
+            `New reply in "${data.topicTitle}"`,
+            "/topic/" + data.topicId
+          );
+        }
+      } catch (_) {}
+    });
+
+    function showToast(text, href) {
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = href ? `<a href="${href}">${text}</a>` : text;
+      document.getElementById("toast-container").appendChild(toast);
+
+      /* animate in */
+      requestAnimationFrame(() => toast.classList.add("show"));
+
+      /* auto-dismiss after 5s */
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 400);
+      }, 5000);
+    }
+  })();
+</script>
