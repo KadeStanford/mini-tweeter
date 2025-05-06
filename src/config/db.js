@@ -11,7 +11,7 @@ class Database {
       useUnifiedTopology: true,
     });
     mongoose.connection.once("open", () =>
-      console.log("✅ MongoDB connected.")
+      console.log(" MongoDB connected.")
     );
     mongoose.connection.on("error", console.error);
     Database.instance = this;

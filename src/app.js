@@ -1,3 +1,4 @@
+require("dotenv").config();
 require("./config/db"); // DB singleton
 
 const express = require("express");
@@ -34,4 +35,4 @@ app.use("/", require("./routes/message")); // stubs
 
 // server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀  Listening on ${PORT}`));
+app.listen(PORT, () => console.log(`  Listening on ${PORT}`));

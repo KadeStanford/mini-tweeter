@@ -88,6 +88,7 @@ exports.getTopicById = async (req, res) => {
     
     res.render('topic-detail', {
       topic,
+      description: topic.description, 
       messages,
       user,
       isSubscribed,
