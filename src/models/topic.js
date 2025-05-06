@@ -1,10 +1,11 @@
 /**
  * ------------------------------------------------
  * Fields available:
- *   • title      – String, required
- *   • creatorId  – ObjectId → User who created it
- *   • createdAt  – Date (auto‐set)
- *   • viewCount  – Number (for T8 stats)
+ *   • title       – String, required
+ *   • creatorId   – ObjectId → User who created it
+ *   • createdAt   – Date (auto-set)
+ *   • viewCount   – Number (for T8 stats: total views)
+ *   • replyCount  – Number (for T8 stats: total replies)
  */
 
 const mongoose = require("mongoose");
@@ -20,12 +21,18 @@ const topicSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   description: { type: String, required: true },
   viewCount: { type: Number, default: 0 },
+  replyCount: { type: Number, default: 0 },
 });
 
-module.exports = mongoose.model("Topic", topicSchema);
-// Method to increment the view count
+/* ---------- helper instance methods ---------- */
 topicSchema.methods.incrementViewCount = function () {
   this.viewCount += 1;
-  return this.save(); // Save the updated document to the database
+  return this.save();
 };
 
+topicSchema.methods.incrementReplyCount = function () {
+  this.replyCount += 1;
+  return this.save();
+};
+
+module.exports = mongoose.model("Topic", topicSchema);

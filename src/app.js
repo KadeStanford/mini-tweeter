@@ -4,14 +4,13 @@ require("./config/db"); // DB singleton
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-
 const app = express();
 
-// view engine
+/* ---------- view engine ---------- */
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// middleware
+/* ---------- middleware ----------- */
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -21,18 +20,25 @@ app.use(
   })
 );
 
-app.get("/dashboard", require('./controllers/dashboardController').getDashboard);
+/* ---------- core routes ---------- */
+app.get(
+  "/dashboard",
+  require("./controllers/dashboardController").getDashboard
+);
+app.get("/", (_req, res) => res.redirect("/signup"));
 
-app.get('/', (req, res) => res.redirect('/signup')); //makes signup be the default route 
-
-// routes
 app.use("/", require("./routes/auth"));
-app.use("/", require("./routes/genre")); 
-app.use("/", require("./routes/topic")); // stubs
-app.use("/", require("./routes/message")); // stubs
+app.use("/", require("./routes/genre"));
+app.use("/", require("./routes/topic"));
+app.use("/", require("./routes/message"));
 
+/* ---------- SSE notifications ---- ★ */
+app.use("/notifications", require("./routes/notifications"));
 
+/* ---------- observers ------------ */
+require("./observers/notifySubscribers");
+require("./observers/topicStats");
 
-// server
+/* ---------- server --------------- */
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`  Listening on ${PORT}`));
