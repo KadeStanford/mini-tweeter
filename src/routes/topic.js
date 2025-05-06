@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const topicController = require('../controllers/topicController');
+const { accessTopic } = require('../controllers/dashboardController'); 
+
+
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
@@ -33,5 +36,7 @@ router.get('/topic/:id', topicController.getTopicById);
 
 // Remove the problematic catch-all route
 // router.all("/topic/*", topicController.placeholder);
+router.get('/topic/:topicId', accessTopic);
 
 module.exports = router;
+
