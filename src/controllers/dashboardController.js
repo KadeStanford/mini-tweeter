@@ -12,6 +12,17 @@ eventBus.subscribe('newMessage', (message) => {
   // Additional actions can be added here, such as updating the UI or notifying users
 });
 
+exports.accessTopic = async (req, res, next) => {
+  try {
+    const topicId = req.params.topicId;
+    // Example: increment view counter
+    // await Topic.findByIdAndUpdate(topicId, { $inc: { viewCount: 1 } });
+    res.redirect(`/topic/${topicId}`); // or render a topic page
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getDashboard = async (req, res) => {
   try {
     const userId = req.session.userId;
